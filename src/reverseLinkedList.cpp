@@ -12,12 +12,26 @@ NOTES:
 */
 
 #include <stdio.h>
-
+#include<stdlib.h>
 struct node {
 	int num;
 	struct node *next;
 };
 
-struct node * reverseLinkedList(struct node *head) {
+struct node * reverseLinkedList(struct node *head) 
+{
+	if (head==NULL)
 	return NULL;
+	struct node* prev = NULL;
+	struct node* current = head;
+	struct node* next;
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	head = prev;
 }
+
