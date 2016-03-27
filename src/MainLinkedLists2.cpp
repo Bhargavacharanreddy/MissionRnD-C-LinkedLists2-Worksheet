@@ -13,16 +13,36 @@ Objectives of LinkedLists2 Lesson:
 */
 #include <stdio.h>
 #include "FunctionHeadersLinkedLists2.h"
+#include<malloc.h>
+struct node
+{
+	int num;
+	struct node *next;
+};
 
-int main(){
+struct node * createNode(int num)
+{
+	struct node *newNode = (struct node *)malloc(sizeof(struct node));
+	newNode->num = num;
+	newNode->next = NULL;
+	return newNode;
+}
 
-	//Test InsertAtEveryKthNode
+struct node * createList(int num)
+{
+	struct node *head = createNode(num % 10);
+	num /= 10;
+	while (num) {
+		struct node *newNode = createNode(num % 10);
+		newNode->next = head;
+		head = newNode;
+		num /= 10;
+	}
+	return head;
+}
 
-	//Test LinkedListMedian
-
-	//Test merge2 LinkedLists
-
-	//Test reverse LinkedList
-
+int main()
+{
+	printf("%d\n", linkedListMedian(createList(12345)));
 	return 0;
 }
